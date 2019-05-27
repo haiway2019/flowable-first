@@ -12,23 +12,24 @@ import java.util.Scanner;
  * @author Haiway  on 2019/5/27
  */
 @Slf4j
-public class ReasonService implements JavaDelegate {
+public class CommonService implements JavaDelegate {
 
     private Expression question;
+    private Expression key;
 
     @Override
     public void execute(DelegateExecution delegateExecution) {
 
         String q = (String)question.getValue(delegateExecution);
+        String kv = (String)key.getValue(delegateExecution);
 
         Map<String,Object> v = delegateExecution.getVariables();
         Scanner scanner = new Scanner(System.in);
         System.out.println(q);
         String reason = scanner.nextLine();
-        v.put("reason",reason);
+        v.put(kv,reason);
 
-        log.info("去干什么补全:"+v);
-
+        log.info("变量信息："+v);
         delegateExecution.setVariables(v);
     }
 }

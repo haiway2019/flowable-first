@@ -17,7 +17,14 @@
         <exclusiveGateway id="sid-E359E863-08C6-45CE-9E3A-C18E1655B928"></exclusiveGateway>
         <serviceTask id="sid-7E404306-DF48-43C7-9A6C-E5F49E027575" name="去哪里" flowable:class="cn.haiway.service.LocationService"></serviceTask>
         <exclusiveGateway id="sid-EE75C494-74D8-48DE-AF1C-3F6E93EAE5D9"></exclusiveGateway>
-        <serviceTask id="sid-B996B53F-F06C-432E-8723-D6BF93CFCAB2" name="去做什么" flowable:class="cn.haiway.service.ReasonService"></serviceTask>
+        <serviceTask id="sid-B996B53F-F06C-432E-8723-D6BF93CFCAB2" name="去做什么"
+                     flowable:class="cn.haiway.service.CommonService">
+            <extensionElements>
+                <flowable:field name="question" stringValue="干哈呢" />
+                <flowable:field name="key" stringValue="reason" />
+            </extensionElements>
+        </serviceTask>
+
         <serviceTask id="sid-8A1D0A5D-A9D3-4179-9042-75556B4B79F8" name="发起确认" flowable:class="cn.haiway.service.ConfirmService"></serviceTask>
         <sequenceFlow id="sid-065FC31C-9134-46A4-AAF0-AF63E5B2FF0C" sourceRef="sid-0F14E3D0-DC7D-45B3-9094-DE7DF55A0E59" targetRef="sid-E359E863-08C6-45CE-9E3A-C18E1655B928"></sequenceFlow>
         <sequenceFlow id="sid-2240DC0E-0494-476F-B348-E05463EE4F1D" sourceRef="sid-7E404306-DF48-43C7-9A6C-E5F49E027575" targetRef="sid-EE75C494-74D8-48DE-AF1C-3F6E93EAE5D9"></sequenceFlow>
