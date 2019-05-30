@@ -1,8 +1,11 @@
 package cn.haiway.controller;
 
+import cn.haiway.pojo.FAQMessage;
 import cn.haiway.process.DeployService;
 import cn.haiway.service.BaiduAIService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +34,13 @@ public class TestController {
 
         deployService.startProcess("approvide",baiduAIService.requestBaidu(content));
     }
+
+    @MessageMapping("/faq")
+    public FAQMessage faqMessage(FAQMessage message) {
+        System.out.println("faq:"+message);
+        return message;
+    }
+
 
     @RequestMapping("/list")
     private List<Map<String,Object>> getPersons(@RequestParam(value = "name", defaultValue = "haiway") String name){
