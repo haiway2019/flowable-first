@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: flowable-first
+
+  main:
+    allow-bean-definition-overriding: true
+
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.97.178.173:3306/flowable?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 6yhn^YHN
+flowable:
+  #关闭定时任务JOB
+  async-executor-activate: false

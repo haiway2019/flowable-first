@@ -16,6 +16,11 @@ public class HttpRestService implements JavaDelegate {
 
         Map<String,Object> v = delegateExecution.getVariables();
         v.put("aim","出差");
+        v.put("startTime",null);
+        v.put("endTime",null);
+        v.put("location",null);
+        v.put("reason",null);
+
 
         delegateExecution.setVariables(v);
     }

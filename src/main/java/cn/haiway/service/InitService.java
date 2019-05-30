@@ -16,6 +16,8 @@ public class InitService implements JavaDelegate {
 
         Map<String,Object> v = delegateExecution.getVariables();
 
+        v.put("startTime",v.get("user_time"));
+        v.put("location",v.get("user_location"));
         log.info("初始化数据:"+v);
 
         delegateExecution.setVariables(v);
