@@ -1,5 +1,6 @@
 package cn.haiway.service;
 
+import cn.haiway.pojo.FAQMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
@@ -35,7 +36,10 @@ public class EndTimeService implements JavaDelegate {
 
         Task task = taskService.createTaskQuery().taskId("").singleResult();
 
-        template.convertAndSend("/topic/callback", "什么时候回?");
+        FAQMessage message = new FAQMessage();
+        message.setName("zhueliang");
+        message.setMessage("什么时候回?");
+        template.convertAndSend("/topic/callback", message);
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("什么时候回?");

@@ -36,9 +36,9 @@ public class TestController {
     }
 
     @MessageMapping("/faq")
-    public FAQMessage faqMessage(FAQMessage message) {
+    public void faqMessage(FAQMessage message) throws IOException {
         System.out.println("faq:"+message);
-        return message;
+        deployService.startProcess("approvide",baiduAIService.requestBaidu(message.getMessage()));
     }
 
 
