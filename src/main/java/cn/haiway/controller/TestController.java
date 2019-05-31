@@ -32,13 +32,13 @@ public class TestController {
     private void ask(@RequestParam(value = "content") String content) throws IOException {
         System.out.println("content:"+content);
 
-        deployService.startProcess("approvide",baiduAIService.requestBaidu(content));
+        deployService.startProcess("approvide",baiduAIService.requestBaidu(content,""));
     }
 
     @MessageMapping("/faq")
     public void faqMessage(FAQMessage message) throws IOException {
         System.out.println("faq:"+message);
-        deployService.startProcess("approvide",baiduAIService.requestBaidu(message.getMessage()));
+        deployService.startProcess("aph",baiduAIService.requestBaidu(message.getMessage(),message.getFaqSessionId()));
     }
 
 

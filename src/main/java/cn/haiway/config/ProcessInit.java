@@ -22,7 +22,7 @@ public class ProcessInit {
     @PostConstruct
     public void deployApproach(){
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("a.bpmn20.xml")
+                .addClasspathResource("aph.bpmn20.xml")
                 .deploy();
 
         repositoryService.createProcessDefinitionQuery()

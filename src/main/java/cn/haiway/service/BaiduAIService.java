@@ -25,15 +25,19 @@ public class BaiduAIService {
     private final static String URL = "https://aip.baidubce.com/rpc/2.0/unit/bot/chat";
 
     private String accessToken = "24.b9123c27e4deb74c8cdab425b1103e5f.2592000.1561778218.282335-16387169";
+    private String botId = "58089";
 
-    public Map<String, Object> requestBaidu(String content) throws IOException {
+    public Map<String, Object> requestBaidu(String content,String sessionId) throws IOException {
+        sessionId = sessionId == null ? "" :sessionId;
         String reqUrl = URL + "?access_token=" + accessToken;
-        String json = "{\"bot_session\":\"\",\"log_id\":\"7758521sd22\"," +
+        String json = "{\"bot_session\":\"{\\\"session_id\\\":\\\""+sessionId+"\\\"}\",\"log_id\":\"7758521sd22\"," +
                 "\"request\":{\"bernard_level\":1," +
                 "\"client_session\":\"{\\\"client_results\\\":\\\"\\\", \\\"candidate_options\\\":[]}\"," +
                 "\"query\":\"" + content + "\",\"query_info\":{\"asr_candidates\":[],\"source\":\"KEYBOARD\",\"type\":\"TEXT\"}," +
                 "\"updates\":\"\",\"user_id\":\"haiway87\"}," +
-                "\"bot_id\":\"53758\",\"version\":\"2.0\"}";
+                "\"bot_id\":\""+botId+"\",\"version\":\"2.0\"}";
+
+        System.out.println("param:"+json);
 
         Map<String, Object> returnMap = new HashMap<>();
         String result = HttpUtil.post(reqUrl, json);
@@ -56,11 +60,19 @@ public class BaiduAIService {
             }
 
             if (slotsList != null) {
-                returnMap.put("slots", slotsList);
+//                returnMap.put("slots", slotsList);
                 for (Map<String, Object> mp : slotsList) {
-                    returnMap.put(mp.get("name") + "", mp.get("original_word"));
+                    String key = mp.get("name")+"";
+                    key = key.substring(key.indexOf("_")+1);
+                    returnMap.put(key, mp.get("normalized_word"));
                 }
             }
+
+            String session = ((Map<String, Object>) map.get("result")).get("bot_session")+"";
+            Map<String, Object> sessionMap = JSON.parseObject(session, new TypeReference<Map<String, Object>>() { });
+
+            String returnSessionId = sessionMap.get("session_id")+"";
+            returnMap.put("faqSessionId",returnSessionId);
             System.out.println(returnMap);
         }
         return returnMap;

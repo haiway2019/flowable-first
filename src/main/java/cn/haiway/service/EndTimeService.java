@@ -34,8 +34,6 @@ public class EndTimeService implements JavaDelegate {
 
         Map<String,Object> v = delegateExecution.getVariables();
 
-        Task task = taskService.createTaskQuery().taskId("").singleResult();
-
         FAQMessage message = new FAQMessage();
         message.setName("zhueliang");
         message.setMessage("什么时候回?");

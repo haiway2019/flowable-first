@@ -27,7 +27,7 @@ public class DeployService {
 
     public void deploy(){
         Deployment deployment = repositoryService.createDeployment()
-                .addClasspathResource("a.bpmn20.xml")
+                .addClasspathResource("aph.bpmn20.xml")
                 .deploy();
 
 
@@ -49,7 +49,7 @@ public class DeployService {
         variables.put("location",location);
         variables.put("reason",null);
 
-         runtimeService.startProcessInstanceByKey("approvide", variables);
+         runtimeService.startProcessInstanceByKey("aph", variables);
     }
 
     public void startProcess(String processName,Map<String,Object> variables){
