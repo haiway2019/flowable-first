@@ -18,7 +18,13 @@
         </flowable:field>
       </extensionElements>
     </serviceTask>
-    <serviceTask id="sid-8A1D0A5D-A9D3-4179-9042-75556B4B79F8" name="发起确认" flowable:class="cn.haiway.service.ConfirmService"></serviceTask>
+   <!-- <userTask id="" name="发起确认" flowable:class="cn.haiway.service.ConfirmService"></userTask>-->
+    <userTask id="sid-8A1D0A5D-A9D3-4179-9042-75556B4B79F8" name="发起确认">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${confirmTaskListener}"></flowable:taskListener>
+      </extensionElements>
+    </userTask>
+
     <endEvent id="sid-54303804-B540-4186-BE92-1B22897B714F" name="结束"></endEvent>
     <sequenceFlow id="sid-2BEFB555-3A28-4DA6-830D-1D75F17A3504" name="不包含结束时间" sourceRef="sid-99AD37E8-8200-4887-AA1F-70989DF211FF" targetRef="sid-0F14E3D0-DC7D-45B3-9094-DE7DF55A0E59">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${endtime==null}]]></conditionExpression>

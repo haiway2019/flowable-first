@@ -38,7 +38,11 @@ public class TestController {
     @MessageMapping("/faq")
     public void faqMessage(FAQMessage message) throws IOException {
         System.out.println("faq:"+message);
-        deployService.startProcess("aph",baiduAIService.requestBaidu(message.getMessage(),message.getFaqSessionId()));
+        if("再见".equals(message.getMessage())||"bye".equals(message.getMessage())){
+            message.setFaqSessionId("");
+        }else{
+            deployService.startProcess("aph",baiduAIService.requestBaidu(message.getMessage(),message.getFaqSessionId()));
+        }
     }
 
 

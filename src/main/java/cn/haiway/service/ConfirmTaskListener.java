@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Haiway  on 2019/5/31
  */
 @Service
-public class StartTimeTaskListener implements TaskListener {
+public class ConfirmTaskListener implements TaskListener {
 
     @Autowired
     TaskService taskService;
@@ -24,14 +24,15 @@ public class StartTimeTaskListener implements TaskListener {
 
     @Override
     public void notify(DelegateTask delegateTask) {
-        System.out.println("id:"+delegateTask.getId());
-
         Map<String, Object> variables = delegateTask.getVariables();
-
         System.out.println("task listener:"+delegateTask.getVariables());
 
         FAQMessage message = new FAQMessage();
-        message.setMessage(variables.get("say")+"");
+        message.setMessage("<h3>请确认下面消息</h3></br>开始时间:"+variables.get("starttime") +
+                "</br>结束时间:"+variables.get("endtime")+
+                "</br>出发地：上海"+
+                "<br>目的地："+variables.get("location")+
+                "</br>出差原因："+variables.get("reason"));
         message.setTaskId(delegateTask.getId());
         message.setVariable(variables);
         message.setFaqSessionId(variables.get("faqSessionId")+"");
