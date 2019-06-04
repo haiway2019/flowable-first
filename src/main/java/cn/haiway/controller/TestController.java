@@ -28,11 +28,13 @@ public class TestController {
     @Autowired
     DeployService deployService;
 
+    private String botId = "58089";
+
     @RequestMapping("/ask")
     private void ask(@RequestParam(value = "content") String content) throws IOException {
         System.out.println("content:"+content);
 
-        deployService.startProcess("approvide",baiduAIService.requestBaidu(content,""));
+        deployService.startProcess("approvide",baiduAIService.requestBaidu(content,"",botId));
     }
 
     @MessageMapping("/faq")
@@ -41,7 +43,7 @@ public class TestController {
         if("再见".equals(message.getMessage())||"bye".equals(message.getMessage())){
             message.setFaqSessionId("");
         }else{
-            deployService.startProcess("aph",baiduAIService.requestBaidu(message.getMessage(),message.getFaqSessionId()));
+            deployService.startProcess("aph",baiduAIService.requestBaidu(message.getMessage(),message.getFaqSessionId(),botId));
         }
     }
 

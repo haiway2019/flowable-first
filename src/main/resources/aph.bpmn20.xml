@@ -6,19 +6,24 @@
     <exclusiveGateway id="sid-B0630E8C-2AC8-4CCF-B759-A52DB37548A4" name="contain"></exclusiveGateway>
     <sequenceFlow id="sid-45497F77-75FE-4E88-ACAF-4C0E65AB5216" sourceRef="startEvent1" targetRef="sid-269089A5-7754-4F6E-BEB9-1724AA9C5359"></sequenceFlow>
     <exclusiveGateway id="sid-DBBAFA8F-EB3E-40FD-9126-E09822CD61B1"></exclusiveGateway>
-    <serviceTask id="sid-0F14E3D0-DC7D-45B3-9094-DE7DF55A0E59" name="什么时候回" flowable:class="cn.haiway.service.EndTimeService"></serviceTask>
+    <userTask id="sid-0F14E3D0-DC7D-45B3-9094-DE7DF55A0E59" name="什么时候回" >
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${startTimeTaskListener}"></flowable:taskListener>
+      </extensionElements>
+    </userTask>
     <exclusiveGateway id="sid-99AD37E8-8200-4887-AA1F-70989DF211FF"></exclusiveGateway>
     <exclusiveGateway id="sid-E359E863-08C6-45CE-9E3A-C18E1655B928"></exclusiveGateway>
-    <serviceTask id="sid-7E404306-DF48-43C7-9A6C-E5F49E027575" name="去哪里" flowable:class="cn.haiway.service.LocationService"></serviceTask>
-    <exclusiveGateway id="sid-EE75C494-74D8-48DE-AF1C-3F6E93EAE5D9"></exclusiveGateway>
-    <serviceTask id="sid-B996B53F-F06C-432E-8723-D6BF93CFCAB2" name="去做什么" flowable:class="cn.haiway.service.ReasonService">
+    <userTask id="sid-7E404306-DF48-43C7-9A6C-E5F49E027575" name="去哪里" >
       <extensionElements>
-        <flowable:field name="question">
-          <flowable:string><![CDATA[你要去做什么]]></flowable:string>
-        </flowable:field>
+        <flowable:taskListener event="create" delegateExpression="${startTimeTaskListener}"></flowable:taskListener>
       </extensionElements>
-    </serviceTask>
-   <!-- <userTask id="" name="发起确认" flowable:class="cn.haiway.service.ConfirmService"></userTask>-->
+    </userTask>
+    <exclusiveGateway id="sid-EE75C494-74D8-48DE-AF1C-3F6E93EAE5D9"></exclusiveGateway>
+    <userTask id="sid-B996B53F-F06C-432E-8723-D6BF93CFCAB2" name="去做什么" >
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${startTimeTaskListener}"></flowable:taskListener>
+      </extensionElements>
+    </userTask>
     <userTask id="sid-8A1D0A5D-A9D3-4179-9042-75556B4B79F8" name="发起确认">
       <extensionElements>
         <flowable:taskListener event="create" delegateExpression="${confirmTaskListener}"></flowable:taskListener>

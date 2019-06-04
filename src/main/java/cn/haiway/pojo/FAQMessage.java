@@ -13,5 +13,6 @@ public class FAQMessage {
     private String message;
     private String taskId;
     private String faqSessionId;
+    private String botId;
     private Map<String,Object> variable;
 }
